@@ -1,12 +1,7 @@
 begin
 ; Make a list of all files we are interested in
- DATADir = "./"
- FILES = systemfunc (" ls -1 " + DATADir + "icon_* ")
- numFILES = dimsizes(FILES)
- print("numFILES = " + numFILES)
- print(FILES)
- print (" ")
- a = addfile(FILES(0),"r")
+
+ a = addfile(icon_file,"r")
 
 p = a->PRES_P0_2L150_GLL0
 str = p@initial_time
@@ -21,7 +16,7 @@ st_spl5 = str_split(st_spl4,":")
 hh = st_spl5(0)
 
 CASE             = "X3D"
-WPS_IM_root_name = "ICON"+CASE
+WPS_IM_root_name = " /home/angelos.d.lampiris/uems/data/icon_int/ICON"+CASE
 earth_radius     = 6371.229
 
 FIELD_P          = "PRESSURE"
@@ -103,18 +98,18 @@ FIELD_SNOWH          = "SNOWH"
 UNITS_SNOWH          = "m"
 DESC_SNOWH          = "Physical Snow Depth"
 
-hhl = addfile("./hhl.nc", "r")
+hhl = addfile("/home/angelos.d.lampiris/uems/data/invariant/hhl.nc", "r")
 hgt = hhl->HGT
 
-hsurf = addfile("./hsurf.nc", "r")
+hsurf = addfile("/home/angelos.d.lampiris/uems/data/invariant/hsurf.nc", "r")
 soilhgt = hsurf->HSURF
 
-lnd = addfile("./land.grib2", "r")
+lnd = addfile("/home/angelos.d.lampiris/uems/data/invariant/land.grib2", "r")
 land = lnd->LAND_P0_L1_GLL0
 
 
-do ifil = 0, numFILES-1      ; BIG FILES LOOP
-    a = addfile(FILES(ifil),"r")
+
+
     p = a->PRES_P0_2L150_GLL0
     ft = p@forecast_time
     tt = a->TMP_P0_2L150_GLL0
@@ -138,9 +133,9 @@ do ifil = 0, numFILES-1      ; BIG FILES LOOP
     cd = systemfunc("date --date='"+yyyy+mm+dd+" "+hh+":00:00 "+ft+" minutes' +'%d'")
     cm = systemfunc("date --date='"+yyyy+mm+dd+" "+hh+":00:00 "+ft+" minutes' +'%m'")
     print(cd+"-"+cm+"-"+cy+" at "+ch)
-    DATE             = cy+"-"+cm+"-"+cd+"_"+ch+":00"
+    DATE             = cy+"-"+cm+"-"+cd+"_"+ch
     output_file_name = WPS_IM_root_name + ":" + DATE
-    system("rm " + output_file_name)
+    system("rm /home/angelos.d.lampiris/uems/data/icon_int/" + output_file_name)
     opt                   = True
     opt@projection        = 0                 ; "Equidistant_Lat_Lon"
     opt@date              = DATE
@@ -192,8 +187,7 @@ do ifil = 0, numFILES-1      ; BIG FILES LOOP
     wrf_wps_write_int(WPS_IM_root_name, FIELD_PMSL, UNITS_PMSL,  DESC_PMSL, pmsl({32.6:44},{370:393.3}), opt)
 
 
-end do
 
-system("for f in ICONX3D*; do  mv ${f} ${f}:00; done")
+system("mv "+output_file_name+" "+output_file_name+":00")
 
 end

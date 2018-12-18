@@ -40,6 +40,10 @@ rm /home/angelos.d.lampiris/uems/data/downloads/*
 rm /home/angelos.d.lampiris/uems/data/gribs/*
 rm /home/angelos.d.lampiris/uems/data/icon_int/*
 
+#/home/angelos.d.lampiris/uems/data/scripts/transformer.ncl
+source /home/angelos.d.lampiris/anaconda3/bin/activate ncl_stable
+
+
 #horizon=6
 start=0
 kyklos=$cyclec
@@ -55,176 +59,623 @@ for ((j=1;j<=60;j+=1)); do
 
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
 #QV
+sleep 1.5s
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2  &
+sleep 1.5s
+
 
 j=$(($j + 1))
 #P
 gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
-wget $gp &
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
 #T
 gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
-wget $gt &
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
 #QV
 gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
-wget $gqv &
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
 #U
 gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
-wget $gu &
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
 #V
 gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
-wget $gv &
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2  &
+sleep 1.5s
+
+
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2 &
+sleep 1.5s
+
+j=$(($j + 1))
+#P
+gp="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/p/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2"
+wget $gp && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_P.grib2.bz2 &
+sleep 1.5s
+#T
+gt="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2"
+wget $gt && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_T.grib2.bz2 &
+sleep 1.5s
+#QV
+gqv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/qv/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2"
+wget $gqv && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_QV.grib2.bz2 &
+sleep 1.5s
+#U
+gu="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2"
+wget $gu && bzip2 -d  icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_U.grib2.bz2 &
+sleep 1.5s
+#V
+gv="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v/icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2"
+wget $gv && bzip2 -d icon-eu_europe_regular-lat-lon_model-level_20${cy}${cm}${cd}${cyclec}_${kk}_${j}_V.grib2.bz2  &
+sleep 1.5s
+
 
 wait
-
-bzip2 -d *.bz2
 cat *.grib2 icon >> icon
 rm *.bz2 *.grib2
 
@@ -232,26 +683,26 @@ done;
 
 ###DOWNLOADING 1-D GRIBS
 gpmsl="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/pmsl/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_PMSL.grib2.bz2"
-wget $gpmsl &
-
+wget $gpmsl  && bzip2 -d icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_PMSL.grib2.bz2 &
+sleep 1.5s
 gpsfc="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/ps/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_PS.grib2.bz2"
-wget $gpsfc &
-
+wget $gpsfc  && bzip2 -d icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_PS.grib2.bz2 &
+sleep 1.5s
 gskin="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t_g/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_T_G.grib2.bz2"
-wget $gskin &
-
+wget $gskin  && bzip2 -d  icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_T_G.grib2.bz2 &
+sleep 1.5s
 gt2m="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t_2m/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_T_2M.grib2.bz2"
-wget $gt2m &
-
+wget $gt2m  && bzip2 -d  icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_T_2M.grib2.bz2 &
+sleep 1.5s
 grh2m="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/relhum_2m/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_RELHUM_2M.grib2.bz2"
-wget $grh2m &
-
+wget $grh2m  && bzip2 -d  icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_RELHUM_2M.grib2.bz2 &
+sleep 1.5s
 gu10m="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/u_10m/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_U_10M.grib2.bz2"
-wget $gu10m &
-
+wget $gu10m  && bzip2 -d  icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_U_10M.grib2.bz2 &
+sleep 1.5s
 gv10m="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/v_10m/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_V_10M.grib2.bz2"
-wget $gv10m &
-
+wget $gv10m  && bzip2 -d icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_V_10M.grib2.bz2  &
+sleep 1.5s
 # gtso="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/t_so/icon-eu_europe_regular-lat-lon_soil-level_20${cy}${cm}${cd}${cyclec}_${kk}_T_SO.grib2.bz2"
 # wget $gtso &
 
@@ -259,29 +710,17 @@ wget $gv10m &
 # wget $gwso &
 
 gwsnow="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/w_snow/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_W_SNOW.grib2.bz2"
-wget $gwsnow &
-
+wget $gwsnow  && bzip2 -d icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_W_SNOW.grib2.bz2 &
+sleep 1.5s
 ghsnow="https://opendata.dwd.de/weather/nwp/icon-eu/grib/${cyclec}/h_snow/icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_H_SNOW.grib2.bz2"
-wget $ghsnow &
+wget $ghsnow  && bzip2 -d icon-eu_europe_regular-lat-lon_single-level_20${cy}${cm}${cd}${cyclec}_${kk}_H_SNOW.grib2.bz &
+sleep 1.5s
 
 wait
-
-bzip2 -d *.bz2
 cat *.grib2 icon >> icon
 rm *.bz2 *.grib2
 
-mv icon /home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2
+mv icon /home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2 && ncl icon_file="/home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2"  /home/angelos.d.lampiris/uems/data/scripts/transformer.ncl &
 rm /home/angelos.d.lampiris/uems/data/downloads/*
+sleep 1s
 done;
-
-cd /home/angelos.d.lampiris/uems/data/icon_int
-ln -sf /home/angelos.d.lampiris/uems/data/gribs/icon_* .
-
-cp /home/angelos.d.lampiris/uems/data/invariant/land.grib2 .
-cp /home/angelos.d.lampiris/uems/data/invariant/hsurf.nc .
-cp /home/angelos.d.lampiris/uems/data/invariant/hhl.nc .
-cp /home/angelos.d.lampiris/uems/data/scripts/transformer.ncl .
-
-source /home/angelos.d.lampiris/anaconda3/bin/activate ncl_stable
-
-ncl transformer.ncl
