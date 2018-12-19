@@ -720,7 +720,8 @@ wait
 cat *.grib2 icon >> icon
 rm *.bz2 *.grib2
 
-mv icon /home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2 && ncl icon_file="/home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2"  /home/angelos.d.lampiris/uems/data/scripts/transformer.ncl &
+mv icon /home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2
+ncl icon_file="/home/angelos.d.lampiris/uems/data/gribs/icon_${kk}_20${cy}${cm}${cd}${cyclec}.grib2"  /home/angelos.d.lampiris/uems/data/scripts/transformer.ncl &
 rm /home/angelos.d.lampiris/uems/data/downloads/*
 sleep 1s
 done;
