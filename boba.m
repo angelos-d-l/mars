@@ -16,5 +16,12 @@ dx = rc/(n-1);
 x = linspace(0, n*dx, n);
 s = kappa * dt/dx^2
 T=zeros(m,n);
-T(:,1)=300;
-T(m,:)=300;
+T(1,:)=300;
+T(:,n)=300;
+
+A(n-2) = 1+2*s;
+A(1) = 1+s+s/2;
+M1=diag(A);
+
+
+
