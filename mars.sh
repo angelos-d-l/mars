@@ -64,7 +64,7 @@ daten=${ny}${nm}${nd}
 #. ../../etc/EMS.profile
 
 ulimit -s unlimited
-horizon=18
+horizon=36
 cd /home/angelos.d.lampiris/uems/uems/runs/bench
 ems_prep --debug metgrid --dset gfsp25pt  --length ${horizon} --cycle ${cyclec}  --sfc sportsstpt   --date 20${cy}${cm}${cd}
 

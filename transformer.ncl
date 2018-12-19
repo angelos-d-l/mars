@@ -16,7 +16,7 @@ st_spl5 = str_split(st_spl4,":")
 hh = st_spl5(0)
 
 CASE             = "X3D"
-WPS_IM_root_name = " /home/angelos.d.lampiris/uems/data/icon_int/ICON"+CASE
+WPS_IM_root_name = "/home/angelos.d.lampiris/uems/data/icon_int/ICON"+CASE
 earth_radius     = 6371.229
 
 FIELD_P          = "PRESSURE"
