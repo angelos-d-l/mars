@@ -69,13 +69,14 @@ cd /home/angelos.d.lampiris/uems/uems/runs/bench
 ems_prep --debug metgrid --dset gfsp25pt  --length ${horizon} --cycle ${cyclec}  --sfc sportsstpt   --date 20${cy}${cm}${cd}
 
 time /home/angelos.d.lampiris/uems/data/scripts/icon_g.sh -c ${cyclec} -h ${horizon} -d 20${cy}${cm}${cd} -f 3
-
+sleep 2m
 cp /home/angelos.d.lampiris/uems/data/icon_int/ICONX3* wpsprd/
 
 python /home/angelos.d.lampiris/uems/control/wps.py
 mv tmp.txt namelist.wps
 
-time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 17 /home/angelos.d.lampiris/uems/uems/bin/metgrid
+time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 30 /home/angelos.d.lampiris/uems/uems/bin/metgrid
+
 
 rm METGRID.TBL metgrid.log.* namelist.wps
 
@@ -128,17 +129,17 @@ sed -i ' dfi_bckstop_month          = 12/c\ dfi_bckstop_month          = '${mdfi
 sed -i '/ dfi_bckstop_day            = 09/c\ dfi_bckstop_day            = '${ddfi1} namelist.input
 sed -i '/ dfi_bckstop_hour           = 11/c\ dfi_bckstop_hour           = '${hdfi1} namelist.input
 
-time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 34  /home/angelos.d.lampiris/uems/uems/bin/real_arw.exe
+time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 16  /home/angelos.d.lampiris/uems/uems/bin/real_arw.exe
 
 
-time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 60  /home/angelos.d.lampiris/uems/uems/bin/wrfm_arw.exe
-
+time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 90  /home/angelos.d.lampiris/wrfm_arw.exe.intel
+/home/angelos.d.lampiris/plots.sh&
 mv wrfout_d01_* wrfprd/
-
+/home/angelos.d.lampiris/plots.sh&
 ems_post --grads
 
 /home/angelos.d.lampiris/antimeteo.sh&
-/home/angelos.d.lampiris/plots.sh&
+
 wait
 
 cd ~/updb
