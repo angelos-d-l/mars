@@ -66,12 +66,13 @@ daten=${ny}${nm}${nd}
 ulimit -s unlimited
 horizon=120
 cd /home/angelos.d.lampiris/uems/uems/runs/bench
+. ../../etc/EMS.profile
 ems_prep --debug metgrid --dset gfsp25pt  --length ${horizon} --cycle ${cyclec}  --sfc sportsstpt   --date 20${cy}${cm}${cd}
 
 time /home/angelos.d.lampiris/uems/data/scripts/icon_g.sh -c ${cyclec} -h ${horizon} -d 20${cy}${cm}${cd} -f 3
 sleep 2m
 cp /home/angelos.d.lampiris/uems/data/icon_int/ICONX3* wpsprd/
-
+source /home/angelos.d.lampiris/anaconda3/bin/activate base
 python /home/angelos.d.lampiris/uems/control/wps.py
 mv tmp.txt namelist.wps
 
@@ -132,15 +133,65 @@ sed -i '/ dfi_bckstop_hour           = 11/c\ dfi_bckstop_hour           = '${hdf
 time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 16  /home/angelos.d.lampiris/uems/uems/bin/real_arw.exe
 
 
-time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 90  /home/angelos.d.lampiris/wrfm_arw.exe.intel
-/home/angelos.d.lampiris/plots.sh&
-mv wrfout_d01_* wrfprd/
-/home/angelos.d.lampiris/plots.sh&
-ems_post --grads
+time /usr/bin/mpiexec  -n 30  /home/angelos.d.lampiris/uems/uems/bin/wrfm_arw.exe
 
+mv wrfout_d01_* wrfprd/
 /home/angelos.d.lampiris/antimeteo.sh&
+ems_post --grads
+/home/angelos.d.lampiris/plots.sh&
+
 
 wait
+
+export NCARG_ROOT=/home/angelos.d.lampiris/ncl
+   NCARG_ROOT=/home/angelos.d.lampiris/ncl
+    PATH=/home/angelos.d.lampiris/ncl/bin:$PATH
+    export NCARG_ROOT
+    export PATH
+
+cd ~/nclimg
+rm ~/nclimg/*
+cp ../nclscripts/* .
+ln -sf /home/angelos.d.lampiris/uems/uems/runs/bench/wrfprd/wrfout_d01* .
+
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+a=1
+for f in *.ncl
+do
+  echo "$f"&
+ncl $f &
+
+done
+wait
+
+
+rm wrfout_d01*
+rm *.ncl
+
+
+
+
+# DISTANT DIRECTORY
+TARGETFOLDER='/nclplots'
+
+#LOCAL DIRECTORY
+SOURCEFOLDER='/home/angelos.d.lampiris/nclimg/'
+
+HOST='files.antimeteo.gr'
+USER='angelos'
+PASS='al578899!'
+
+lftp -f "
+set ftp:ssl-allow no
+open $HOST
+user $USER $PASS
+lcd $SOURCEFOLDER
+mirror --delete-first --transfer-all --parallel=100 --reverse  --verbose $SOURCEFOLDER $TARGETFOLDER
+bye
+"
+
 
 cd ~/updb
 time xz -9 --threads=0 weatherspot.txt

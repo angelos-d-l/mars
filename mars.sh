@@ -66,10 +66,11 @@ daten=${ny}${nm}${nd}
 ulimit -s unlimited
 horizon=36
 cd /home/angelos.d.lampiris/uems/uems/runs/bench
+. ../../etc/EMS.profile
 ems_prep --debug metgrid --dset gfsp25pt  --length ${horizon} --cycle ${cyclec}  --sfc sportsstpt   --date 20${cy}${cm}${cd}
 
 time /home/angelos.d.lampiris/uems/data/scripts/icon_g.sh -c ${cyclec} -h ${horizon} -d 20${cy}${cm}${cd} -f 1
-
+sleep 2m
 cp /home/angelos.d.lampiris/uems/data/icon_int/ICONX3* wpsprd/
 
 python /home/angelos.d.lampiris/uems/control/wps.py
@@ -128,91 +129,16 @@ sed -i ' dfi_bckstop_month          = 12/c\ dfi_bckstop_month          = '${mdfi
 sed -i '/ dfi_bckstop_day            = 09/c\ dfi_bckstop_day            = '${ddfi1} namelist.input
 sed -i '/ dfi_bckstop_hour           = 11/c\ dfi_bckstop_hour           = '${hdfi1} namelist.input
 
-time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 34  /home/angelos.d.lampiris/uems/uems/bin/real_arw.exe
+time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 30  /home/angelos.d.lampiris/uems/uems/bin/real_arw.exe
 
 
-time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 60  /home/angelos.d.lampiris/uems/uems/bin/wrfm_arw.exe
+time /home/angelos.d.lampiris/uems/uems/util/mpich2/bin/mpiexec.gforker  -n 30  /home/angelos.d.lampiris/uems/uems/bin/wrfm_arw.exe
 
 mv wrfout_d01_* wrfprd/
-
+/home/angelos.d.lampiris/antimeteo2.sh&
 ems_post --grads
-
-
-shopt -s extglob
-
-
-cd /home/angelos.d.lampiris/work
-
-rm -f *
-
-ln -sf /home/angelos.d.lampiris/uems/uems/runs/bench/emsprd/grads/* .
-mv *.ctl in.ctl
-if [ ! -f ./in.ctl ]; then
-    exit 0
-fi
-
-cp /home/angelos.d.lampiris/scripts/gr_fw/* .
-
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
-a=1
-for f in *.gs
-do
-  echo "$f"&
-grads -blcx $f &
-
-done
+/home/angelos.d.lampiris/plots2.sh&
 wait
-
-rm -f /home/angelos.d.lampiris/latest/*
-
-mv *.png /home/angelos.d.lampiris/latest/
-
-rm *.gs
-
-###DO pre
-cp -f /home/angelos.d.lampiris/scripts/gr_comp3/* .
-
-grads  -a 1.2029  -bcx rain.gs
-
-mv pre*.png /home/angelos.d.lampiris/latest/
-
-rm *.gs
-
-cp -f /home/angelos.d.lampiris/scripts/gr_ath/* .
-
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
-a=1
-for f in *.gs
-do
-  echo "$f"&
-grads -blcx $f &
-
-done
-wait
-
-mv *.png /home/angelos.d.lampiris/latest/
-
-
-# DISTANT DIRECTORY
-TARGETFOLDER='/plots3'
-
-#LOCAL DIRECTORY
-SOURCEFOLDER='/home/angelos.d.lampiris/latest/'
-
-HOST='files.antimeteo.gr'
-USER='angelos'
-PASS='al578899!'
-
-lftp -f "
-set ftp:ssl-allow no
-open $HOST
-user $USER $PASS
-lcd $SOURCEFOLDER
-mirror --delete-first --transfer-all --parallel=100 --reverse  --verbose $SOURCEFOLDER $TARGETFOLDER
-bye
-"
 
 sudo shutdown -h now
 

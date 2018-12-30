@@ -1,0 +1,84 @@
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| ID             | int(11)     | YES  |     | NULL    |       |
+| HOURSinced     | int(11)     | YES  |     | NULL    |       |
+| T2m            | tinyint(4)  | YES  |     | NULL    |       |
+| RH             | tinyint(4)  | YES  |     | NULL    |       |
+| Wind_intensity | tinyint(4)  | YES  |     | NULL    |       |
+| Wind_dir       | smallint(6) | YES  |     | NULL    |       |
+| WT             | tinyint(4)  | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+
+mysql --user=antimeteo --password=2392lampiriS FORECASTS --port=3306 --host=db56.grserver.gr\q
+
+
+Full level index =    1     Height =     0.0 m
+Full level index =    2     Height =    56.6 m      Thickness =   56.6 m
+Full level index =    3     Height =   137.9 m      Thickness =   81.4 m
+Full level index =    4     Height =   244.7 m      Thickness =  106.8 m
+Full level index =    5     Height =   377.6 m      Thickness =  132.9 m
+Full level index =    6     Height =   546.3 m      Thickness =  168.7 m
+Full level index =    7     Height =   761.1 m      Thickness =  214.8 m
+Full level index =    8     Height =  1016.2 m      Thickness =  255.0 m
+Full level index =    9     Height =  1238.6 m      Thickness =  222.4 m
+Full level index =   10     Height =  1466.0 m      Thickness =  227.4 m
+Full level index =   11     Height =  1698.8 m      Thickness =  232.7 m
+Full level index =   12     Height =  1937.1 m      Thickness =  238.3 m
+Full level index =   13     Height =  2397.4 m      Thickness =  460.4 m
+Full level index =   14     Height =  2857.8 m      Thickness =  460.4 m
+Full level index =   15     Height =  3318.2 m      Thickness =  460.4 m
+Full level index =   16     Height =  3778.6 m      Thickness =  460.4 m
+Full level index =   17     Height =  4238.9 m      Thickness =  460.4 m
+Full level index =   18     Height =  4699.3 m      Thickness =  460.4 m
+Full level index =   19     Height =  5159.7 m      Thickness =  460.4 m
+Full level index =   20     Height =  5620.1 m      Thickness =  460.4 m
+Full level index =   21     Height =  6080.4 m      Thickness =  460.4 m
+Full level index =   22     Height =  6540.8 m      Thickness =  460.4 m
+Full level index =   23     Height =  7001.2 m      Thickness =  460.4 m
+Full level index =   24     Height =  7461.6 m      Thickness =  460.4 m
+Full level index =   25     Height =  7921.9 m      Thickness =  460.4 m
+Full level index =   26     Height =  8382.3 m      Thickness =  460.4 m
+Full level index =   27     Height =  8842.7 m      Thickness =  460.4 m
+Full level index =   28     Height =  9303.1 m      Thickness =  460.4 m
+Full level index =   29     Height =  9763.4 m      Thickness =  460.4 m
+Full level index =   30     Height = 10223.8 m      Thickness =  460.4 m
+Full level index =   31     Height = 10684.2 m      Thickness =  460.4 m
+Full level index =   32     Height = 11144.6 m      Thickness =  460.4 m
+Full level index =   33     Height = 11604.9 m      Thickness =  460.4 m
+Full level index =   34     Height = 12065.3 m      Thickness =  460.4 m
+Full level index =   35     Height = 12525.7 m      Thickness =  460.4 m
+Full level index =   36     Height = 12986.1 m      Thickness =  460.4 m
+Full level index =   37     Height = 13446.5 m      Thickness =  460.4 m
+Full level index =   38     Height = 13906.8 m      Thickness =  460.4 m
+Full level index =   39     Height = 14367.2 m      Thickness =  460.4 m
+Full level index =   40     Height = 14827.6 m      Thickness =  460.4 m
+Full level index =   41     Height = 15288.0 m      Thickness =  460.4 m
+Full level index =   42     Height = 15748.3 m      Thickness =  460.4 m
+Full level index =   43     Height = 16208.7 m      Thickness =  460.4 m
+Full level index =   44     Height = 16669.1 m      Thickness =  460.4 m
+Full level index =   45     Height = 17129.5 m      Thickness =  460.4 m
+Full level index =   46     Height = 17589.8 m      Thickness =  460.4 m
+Full level index =   47     Height = 18050.2 m      Thickness =  460.4 m
+Full level index =   48     Height = 18510.6 m      Thickness =  460.4 m
+Full level index =   49     Height = 18971.0 m      Thickness =  460.4 m
+Full level index =   50     Height = 19431.3 m      Thickness =  460.4 m
+Full level index =   51     Height = 19891.7 m      Thickness =  460.4 m
+
+# added by Anaconda3 5.3.1 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/angelos.d.lampiris/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/angelos.d.lampiris/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/angelos.d.lampiris/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/angelos.d.lampiris/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
+. /home/angelos.d.lampiris/anaconda3/etc/profile.d/conda.sh
