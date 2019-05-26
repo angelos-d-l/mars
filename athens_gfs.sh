@@ -51,22 +51,50 @@ echo past cycle 20${py}-${pm}-${pd}-${cyclep}
 echo current cycle 20${cy}-${cm}-${cd}-${cyclec}
 echo next cycle 20${ny}-${nm}-${nd}-${cyclen}
 daten=${ny}${nm}${nd}
-horizon=96
-cd  /mirror/uems/nuems2/uems/runs/g2
+
+#####################################################
+#######################CYCLE BLOCK###################
+#####################################################
+export NCARG_USRRESFILE=/home/angelos/.hluresfile2
+export NCARG_ROOT=/home/angelos/ncl
+   NCARG_ROOT=/home/angelos/ncl
+    PATH=/home/angelos/ncl/bin:$PATH
+    export NCARG_ROOT
+    export PATH
+export KMP_STACKSIZE=500000000
+ulimit -s unlimited
+export LD_LIBRARY_PATH=/home/angelos/net/lib:${LD_LIBRARY_PATH}
+
+horizon=15
+
+
+cd  /mirror/uems/nuems3/uems/runs/mother
 . ../../etc/EMS.profile
-rm grib/*
-ems_prep --dset gfsp50  --length ${horizon}
+
+ems_prep   --dset gfsp25pt  --length ${horizon} --cycle ${cyclec}   --date 20${cy}${cm}${cd}
+
 
 ems_run
-ems_post --grads
+
+ems_post
+
+cd  /mirror/uems/nuems3/uems/runs/prophet
+#rm grib/*
+ems_prep  --domains 2 --dset arw  --length ${horizon} --cycle ${cyclec}   --date 20${cy}${cm}${cd}
 
 
+ems_run --domains 2
+
+ems_post --grads --domain 2
+
+
+. /mirror/uems/nuems2/uems/etc/EMS.profile
 cd emsprd/grads/
 mv *.ctl in.ctl
 if [ ! -f ./in.ctl ]; then
     exit 0
 fi
-cp /home/angelos/gr_gl/* .
+cp /mirror/ssd/cloud_scripts/scripts/gr_fw/* .
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 a=1
@@ -78,50 +106,27 @@ grads -blcx $f &
 done
 wait
 
-rm -f /mirror/ssd/global/*
+rm -f /mirror/ssd/nmmd01/*
 
-mv *.png /mirror/ssd/global/
+mv *.png /mirror/ssd/nmmd01/
 
-exit 0
-/home/angelos/scripts/mars/forecastglo.sh -c ${cyclec} -d 20${cy}${cm}${cd} -h ${horizon}
+export LD_LIBRARY_PATH=/home/angelos/anaconda3/envs/ncl_stable/lib:${LD_LIBRARY_PATH}
+cd /mirror/ssd/nmmd02/
+rm *.png *.jpg
+ln -sf /mirror/uems/nuems3/uems/runs/prophet/wrfprd/wrfout_d02* .
+cp /mirror/ssd/cloud_scripts/nclscripts/* .
 
-cd /home/angelos/scripts/mars
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+a=1
+for f in *.ncl
+do
+  echo "$f"&
+ncl $f &
 
-HOST='forecastweather.gr'
-USER='forecast'
-PASSWD='stam042727mg19912018'
-FILE='global.html'
-
-ftp -n $HOST <<END_SCRIPT
-quote USER $USER
-quote PASS $PASSWD
-binary
-cd /public_html/prognosi
-put $FILE
-quit
-END_SCRIPT
+done
+wait
 
 
-
-# DISTANT DIRECTORY
-TARGETFOLDER='/public_html/prognosi/glim'
-
-#LOCAL DIRECTORY
-SOURCEFOLDER='/mirror/ssd/global/'
-
-HOST='forecastweather.gr'
-USER='forecast'
-PASS='stam042727mg19912018'
-
-lftp -f "
-set ftp:ssl-allow no
-open $HOST
-user $USER $PASS
-lcd $SOURCEFOLDER
-mirror --delete-first --transfer-all --parallel=10 --reverse  --verbose $SOURCEFOLDER $TARGETFOLDER
-bye
-"
-
-
-exit 0
-#/public_html/prognosi/glim
+rm wrfout_d02*
+rm *.ncl

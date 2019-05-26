@@ -65,7 +65,7 @@ export KMP_STACKSIZE=500000000
 ulimit -s unlimited
 export LD_LIBRARY_PATH=/home/angelos/net/lib:${LD_LIBRARY_PATH}
 
-horizon=36
+horizon=96
 cd  /mirror/uems/nuems2/uems/runs/bartzabel
 . ../../etc/EMS.profile
 

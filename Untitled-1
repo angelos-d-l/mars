@@ -1,0 +1,1 @@
+ems_prep  --domains 2 --dset gfsp25pt  --length 18 --cycle ${cyclec} --sfc sportsstpt   --date 20180421
